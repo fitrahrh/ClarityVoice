@@ -1,0 +1,24 @@
+name: ClarityVoice
+version: '${version}'
+main: me.harukiyu.clarityvoice.ClarityVoice
+api-version: '1.21'
+author: Harukiyu
+description: Cross-platform 3D Proximity Voice Chat bridge connecting Simple Voice Chat Mod with a Browser Web App via OTP authentication.
+softdepend:
+  - voicechat
+  - ClarityLangCore
+
+commands:
+  clarityvoice:
+    description: Perintah utama ClarityVoice.
+    aliases:
+      - cv
+      - voice
+      - voiceweb
+    permission: clarityvoice.use
+    usage: /<command> [otp|disconnect|status|help]
+
+permissions:
+  clarityvoice.use:
+    description: Mengizinkan pemain menggunakan perintah ClarityVoice.
+    default: true

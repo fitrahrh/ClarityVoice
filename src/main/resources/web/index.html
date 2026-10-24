@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#080c14" />
+    <meta name="description" content="Bergabung ke Proximity Voice Chat server Minecraft langsung dari browser dengan efek 3D Spatial Audio." />
+    <title>Voice — Clarity Realm</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="icon" type="image/png" href="clarity-logo.png" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="announcement">
+      <span class="announcement-dot"></span>
+      <span data-i18n="announcement_title">3D PROXIMITY VOICE CHAT ONLINE</span>
+      <span class="announcement-divider">/</span>
+      <span data-i18n="announcement_desc">Dengar dan bicara dengan pemain di sekitarmu secara real-time</span>
+      <span aria-hidden="true">↗</span>
+    </div>
+
+    <!-- SITE HEADER -->
+    <header class="site-header">
+      <div class="brand">
+        <img src="clarity-logo.png" alt="Clarity Logo" class="brand-logo" />
+        <span class="brand-name">CLARITY<span>VOICE</span></span>
+      </div>
+
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a href="#home" class="nav-link active" data-i18n="nav_voice">Voice Chat</a>
+        <a href="#benefits" class="nav-link" data-i18n="nav_features">Fitur & 3D Audio</a>
+        <a href="#guide" class="nav-link" data-i18n="nav_guide">Petunjuk OTP</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- LANGUAGE SELECTOR -->
+        <div class="lang-selector">
+          <select id="langSelect" class="lang-dropdown" aria-label="Pilih Bahasa">
+            <option value="id">🇮🇩 ID</option>
+            <option value="en">🇺🇸 EN</option>
+            <option value="de">🇩🇪 DE</option>
+            <option value="es">🇪🇸 ES</option>
+            <option value="fr">🇫🇷 FR</option>
+            <option value="ja">🇯🇵 JA</option>
+            <option value="pt">🇧🇷 PT</option>
+            <option value="ru">🇷🇺 RU</option>
+            <option value="zh">🇨🇳 ZH</option>
+          </select>
+        </div>
+
+        <div class="voice-conn-status" id="voiceStatusBadge">
+          <span class="status-indicator indicator-offline" id="statusDot"></span>
+          <span class="status-copy">
+            <strong id="statusTitle" data-i18n="status_offline">VOICE OFFLINE</strong>
+            <small id="statusSubtitle" data-i18n="status_not_connected">Belum terhubung</small>
+          </span>
+        </div>
+
+        <div id="pingBadge" class="ping-chip hidden">
+          <span id="pingValue">0</span> ms
+        </div>
+
+        <div id="userProfileChip" class="user-chip hidden">
+          <img id="userAvatar" class="user-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3C/svg%3E" alt="Avatar" />
+          <span id="userName" class="user-name">Player</span>
+          <button id="btnDisconnectTop" class="btn-disconnect" title="Putuskan Sesi Voice" data-i18n="btn_disconnect">Putus</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="home">
+      <!-- 1. HERO & LOGIN OTP SECTION (Visible when not connected) -->
+      <section class="hero" id="loginSection" aria-labelledby="hero-title">
+        <div class="hero-texture"></div>
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> <span data-i18n="hero_eyebrow">VOICE CHAT LINTAS PLATFORM</span></div>
+          <h1 id="hero-title"><span data-i18n="hero_title_1">Lebih dekat dengan</span><br /><span data-i18n="hero_title_2">suara</span> <span>3D spatial.</span></h1>
+          <p data-i18n="hero_desc">
+            Bergabung ke proximity voice chat server langsung melalui browser tanpa perlu instal mod. Dengar temanmu secara 3D berdasarkan jarak & arah karakter in-game.
+          </p>
+
+          <!-- OTP Input Form Container -->
+          <div class="otp-box">
+            <!-- HTTP Browser Microphone Warning Notice -->
+            <div id="insecureHttpNotice" class="insecure-notice hidden">
+              <div class="notice-top">
+                <span class="notice-icon">⚠️</span>
+                <strong data-i18n="notice_mic_title">Akses Mikrofon Memerlukan HTTPS / Izin Browser</strong>
+              </div>
+              <p data-i18n="notice_mic_desc">
+                Browser (Chrome / Edge) membatasi mikrofon pada IP HTTP biasa. Anda tetap bisa terhubung untuk <strong>mendengar suara 3D pemain lain</strong> (Listen-Only).
+              </p>
+              <div class="notice-guide">
+                <span data-i18n="notice_guide_title">Untuk mengaktifkan mikrofon (Solusi Chrome/Edge):</span>
+                <ol>
+                  <li>Buka tab baru: <code>chrome://flags/#unsafely-treat-insecure-origin-as-secure</code></li>
+                  <li>Masukkan URL: <code id="originCopyText">http://...</code></li>
+                  <li>Ubah ke <strong>Enabled</strong> lalu klik <strong>Relaunch</strong> browser.</li>
+                </ol>
+              </div>
+            </div>
+
+            <label class="otp-label" for="otp1" data-i18n="otp_label">Masukkan 6-Digit Kode OTP dari Minecraft</label>
+            <div class="otp-inputs" id="otpGroup">
+              <input type="text" maxlength="1" class="otp-digit" id="otp1" autofocus autocomplete="off" inputmode="numeric" />
+              <input type="text" maxlength="1" class="otp-digit" id="otp2" autocomplete="off" inputmode="numeric" />
+              <input type="text" maxlength="1" class="otp-digit" id="otp3" autocomplete="off" inputmode="numeric" />
+              <input type="text" maxlength="1" class="otp-digit" id="otp4" autocomplete="off" inputmode="numeric" />
+              <input type="text" maxlength="1" class="otp-digit" id="otp5" autocomplete="off" inputmode="numeric" />
+              <input type="text" maxlength="1" class="otp-digit" id="otp6" autocomplete="off" inputmode="numeric" />
+            </div>
+            <div id="otpError" class="error-text hidden" data-i18n="otp_error">Kode OTP tidak valid atau telah kedaluwarsa.</div>
+
+            <div class="hero-buttons">
+              <button class="button button-primary" id="btnConnect">
+                <span id="btnConnectText" data-i18n="btn_connect">Hubungkan Mikrofon</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="hero-note">
+            <span class="note-avatar">◈</span>
+            <span><span data-i18n="hero_hint_1">Gunakan</span> <strong>/voice otp</strong> <span data-i18n="hero_hint_2">di dalam game</span></span>
+            <span class="note-divider"></span>
+            <span class="stars">★★★★★</span>
+            <small data-i18n="hero_audio_tag">3D HRTF Web Audio</small>
+          </div>
+        </div>
+
+        <!-- HERO VOXEL ARTWORK -->
+        <div class="hero-art" aria-label="Visual dunia fantasi Clarity Realm">
+          <div class="art-glow"></div>
+          <div class="sun"></div>
+          <div class="art-moon">✦</div>
+          <div class="cloud cloud-one"></div>
+          <div class="cloud cloud-two"></div>
+          <div class="mountain mountain-back"></div>
+          <div class="mountain mountain-mid"></div>
+          <div class="island">
+            <div class="island-grass"></div>
+            <div class="island-dirt"></div>
+            <div class="island-stone"></div>
+          </div>
+          <div class="tree tree-one"><i></i><b></b></div>
+          <div class="tree tree-two"><i></i><b></b></div>
+          <div class="tree tree-three"><i></i><b></b></div>
+          <div class="crystal crystal-one"><i></i></div>
+          <div class="crystal crystal-two"><i></i></div>
+          <div class="floating-cube cube-one"></div>
+          <div class="floating-cube cube-two"></div>
+          <div class="floating-cube cube-three"></div>
+          <div class="art-label">
+            <span class="label-mark">✳</span>
+            <span>
+              <small data-i18n="art_spatial">SPATIAL AUDIO ENGINE</small>
+              <strong data-i18n="art_opus">48kHz Opus & HRTF Active</strong>
+            </span>
+            <span class="label-arrow">↗</span>
+          </div>
+        </div>
+
+        <div class="hero-bottom">
+          <span data-i18n="hero_no_mod">NO MOD REQUIRED FOR WEB</span>
+          <span class="bottom-center"><i></i> <span data-i18n="hero_radius">Proximity Radius: 48 Blocks</span></span>
+          <span data-i18n="hero_tech">JAVA 25 & WEB AUDIO API</span>
+        </div>
+      </section>
+
+      <!-- 2. DASHBOARD SECTION (Visible when connected) -->
+      <section class="dashboard-section hidden" id="dashboardSection" aria-label="Panel Voice Chat Aktif">
+        <div class="dashboard-header">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> <span data-i18n="dash_eyebrow">SESI VOICE TERHUBUNG</span></div>
+            <h2 class="dash-title"><span data-i18n="dash_title_1">Ruang Suara</span> <span data-i18n="dash_title_2">Aktif.</span></h2>
+          </div>
+          <div class="dash-header-meta">
+            <div class="live-indicator">
+              <span class="pulse-dot"></span>
+              <span data-i18n="dash_live_mic">LIVE MIKROFON</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Insecure Context Notice for Connected Dashboard -->
+        <div id="dashMicWarningNotice" class="insecure-notice hidden" style="margin-bottom: 24px;">
+          <div class="notice-top">
+            <span class="notice-icon">⚠️</span>
+            <strong data-i18n="notice_listen_only">Mode Hanya Dengar Aktif (Mikrofon Dibatasi Browser)</strong>
+          </div>
+          <p data-i18n="notice_listen_desc">
+            Anda dapat mendengar semua pemain di sekitar secara 3D, namun mikrofon dibatasi oleh browser karena menggunakan alamat HTTP biasa.
+            Untuk mengaktifkan mikrofon di Chrome/Edge: buka <code>chrome://flags/#unsafely-treat-insecure-origin-as-secure</code>, masukkan URL server, pilih <strong>Enabled</strong>, lalu klik <strong>Relaunch</strong>.
+          </p>
+        </div>
+
+        <div class="dash-layout">
+          <!-- LEFT COLUMN: AUDIO CONTROLS & LISTENER HUD -->
+          <div class="dash-card controls-deck">
+            <div class="card-top">
+              <span class="card-tag" data-i18n="card_audio_controls">KONTROL SUARA</span>
+              <span class="card-status-pill" id="micStateBadge" data-i18n="badge_vad_active">VAD Aktif</span>
+            </div>
+
+            <!-- VOICE GROUP CARD (Visible if in a Simple Voice Chat group) -->
+            <div id="voiceGroupCard" class="group-card hidden">
+              <div class="group-icon-wrap">👥</div>
+              <div class="group-details">
+                <span class="group-tag" data-i18n="group_badge">GRUP SUARA MOD</span>
+                <strong id="groupNameText">Grup</strong>
+                <small id="groupTypeText" data-i18n="group_active">Terkoneksi ke Voice Group</small>
+              </div>
+            </div>
+
+            <!-- VU METER -->
+            <div class="vu-container">
+              <div class="vu-meta">
+                <span data-i18n="mic_input">Input Mikrofon</span>
+                <strong id="vuValueText">0%</strong>
+              </div>
+              <div class="vu-track">
+                <div class="vu-fill" id="vuBar" style="width: 0%;"></div>
+                <div class="vad-marker" id="vadThresholdMarker" style="left: 25%;" title="Batas Suara (VAD)"></div>
+              </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="action-buttons-grid">
+              <button id="btnMute" class="control-btn" type="button">
+                <span class="btn-icon">🎙</span>
+                <span id="btnMuteText" data-i18n="btn_mute">Mute Mic</span>
+              </button>
+              <button id="btnDeafen" class="control-btn" type="button">
+                <span class="btn-icon">🎧</span>
+                <span id="btnDeafenText" data-i18n="btn_deafen">Deafen</span>
+              </button>
+            </div>
+
+            <!-- TRANSMISSION MODE -->
+            <div class="mode-deck">
+              <label class="setting-label" data-i18n="mode_label">Mode Transmisi</label>
+              <div class="mode-tabs">
+                <button id="modeVad" class="mode-tab active" type="button" data-i18n="mode_vad">Voice Activity (VAD)</button>
+                <button id="modePtt" class="mode-tab" type="button" data-i18n="mode_ptt">Push-to-Talk (PTT)</button>
+              </div>
+            </div>
+
+            <!-- VAD SLIDER -->
+            <div id="vadSettingsGroup" class="setting-row">
+              <div class="setting-meta">
+                <span data-i18n="vad_sensitivity">Sensitivitas VAD</span>
+                <strong id="vadVal">25%</strong>
+              </div>
+              <input type="range" id="vadSlider" min="1" max="100" value="25" class="green-slider" />
+            </div>
+
+            <!-- PTT BUTTON -->
+            <div id="pttGroup" class="ptt-box hidden">
+              <button id="btnPtt" class="ptt-trigger" type="button">
+                <strong data-i18n="ptt_hold">TAHAN UNTUK BICARA</strong>
+                <small data-i18n="ptt_keys">Tekan tombol [Space] atau [V]</small>
+              </button>
+            </div>
+
+            <!-- AUDIO HARDWARE DEVICE SELECTORS -->
+            <div class="device-deck">
+              <div class="device-row">
+                <label class="setting-label" for="micDeviceSelect" data-i18n="device_input">Perangkat Mikrofon (Input)</label>
+                <select id="micDeviceSelect" class="device-dropdown" aria-label="Microphone input"></select>
+              </div>
+              <div class="device-row" id="speakerSettingRow">
+                <label class="setting-label" for="speakerDeviceSelect" data-i18n="device_output">Perangkat Audio (Output/Speaker)</label>
+                <select id="speakerDeviceSelect" class="device-dropdown" aria-label="Speaker output"></select>
+              </div>
+            </div>
+
+            <!-- 3D POSITION HUD -->
+            <div class="coords-deck">
+              <div class="coords-top">
+                <span class="coords-title" data-i18n="coords_title">Posisi Karakter In-Game</span>
+                <span class="badge-world" id="worldBadge">World</span>
+              </div>
+              <div class="coords-row">
+                <div class="coord-cell"><small>X</small><strong id="coordX">0.0</strong></div>
+                <div class="coord-cell"><small>Y</small><strong id="coordY">0.0</strong></div>
+                <div class="coord-cell"><small>Z</small><strong id="coordZ">0.0</strong></div>
+              </div>
+              <div class="coords-note">
+                <span>◈ <span data-i18n="coords_spatial">HRTF Spatial Audio</span> • <span data-i18n="coords_radius">Radius</span>: <strong id="maxDistText">48</strong> <span data-i18n="coords_blocks">Blok</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: NEARBY PLAYERS LIST -->
+          <div class="dash-card players-deck">
+            <div class="card-top">
+              <div class="players-title-wrap">
+                <span class="card-tag" data-i18n="card_radar">3D SPATIAL RADAR</span>
+                <h3 class="players-headline"><span data-i18n="nearby_title">Pemain di Sekitar</span> <span id="nearbyCount">0</span></h3>
+              </div>
+              <div class="master-vol-control">
+                <label for="masterVolume" data-i18n="master_vol">Master:</label>
+                <input type="range" id="masterVolume" min="0" max="150" value="100" class="green-slider slider-mini" title="Master Volume" />
+              </div>
+            </div>
+
+            <div id="nearbyPlayersList" class="players-grid">
+              <!-- Populated dynamically via app.js -->
+              <div class="empty-players">
+                <span class="empty-glyph">◈</span>
+                <strong data-i18n="nearby_empty_title">Tidak ada pemain di dekatmu</strong>
+                <p data-i18n="nearby_empty_desc">Pemain dalam radius 48 blok di world yang sama akan otomatis terdengar dan muncul di sini.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. TRUST & FEATURES STRIP -->
+      <section class="trust-strip" id="benefits" aria-label="Keunggulan ClarityVoice">
+        <div class="trust-item">
+          <span class="trust-icon">✧</span>
+          <span>
+            <strong data-i18n="feat_1_title">Langsung Masuk</strong>
+            <small data-i18n="feat_1_desc">Cukup buka browser & masukkan OTP</small>
+          </span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon">◈</span>
+          <span>
+            <strong data-i18n="feat_2_title">3D Spatial HRTF</strong>
+            <small data-i18n="feat_2_desc">Arah & jarak suara presisi sesuai game</small>
+          </span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon">⌘</span>
+          <span>
+            <strong data-i18n="feat_3_title">Lintas Platform</strong>
+            <small data-i18n="feat_3_desc">Mod Simple Voice Chat ↔ Web Client</small>
+          </span>
+        </div>
+        <div class="trust-item">
+          <span class="trust-icon">☏</span>
+          <span>
+            <strong data-i18n="feat_4_title">Kontrol Independen</strong>
+            <small data-i18n="feat_4_desc">Atur volume tiap pemain tersendiri</small>
+          </span>
+        </div>
+      </section>
+
+      <!-- 4. GUIDE STRIP -->
+      <section class="faq-strip" id="guide">
+        <div>
+          <span class="faq-icon">?</span>
+          <span>
+            <strong data-i18n="guide_title">Cara menggunakan Clarity Web Voice?</strong>
+            <small data-i18n="guide_desc">Ketik <code>/voice otp</code> di chat Minecraft untuk mendapatkan 6 digit kode instan.</small>
+          </span>
+        </div>
+        <a href="#home" class="guide-link"><span data-i18n="guide_start">Mulai Bicara</span> <span>↗</span></a>
+      </section>
+    </main>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+      <div class="brand footer-brand">
+        <img src="clarity-logo.png" alt="Clarity Logo" class="brand-logo footer-logo" />
+        <span class="brand-name">CLARITY<span>VOICE</span></span>
+      </div>
+      <span data-i18n="footer_copy">© 2026 Clarity Realm. Web Voice Chat Powered by Simple Voice Chat API.</span>
+      <div>
+        <a href="#benefits" data-i18n="nav_features">Fitur</a>
+        <a href="#guide" data-i18n="nav_guide">Bantuan</a>
+      </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

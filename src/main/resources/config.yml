@@ -1,0 +1,33 @@
+# ==============================================================================
+#                       ClarityVoice Configuration
+#   Cross-platform 3D Proximity Voice Chat (Simple Voice Chat Mod <-> Web App)
+# ==============================================================================
+
+server:
+  # IP address / host to bind the embedded Javalin Web & WebSocket server.
+  # Use "0.0.0.0" to listen on all interfaces.
+  host: "0.0.0.0"
+
+  # Port for both Web Client HTTP static files and WebSocket (/ws/voice).
+  # Sesuaikan dengan port allocation di hosting panel (contoh: 12024).
+  port: 12024
+
+  # Public URL accessible by players in browser.
+  # URL ini digunakan untuk link chat otomatis saat pemain mengetik "/voice otp".
+  # Mendukung penuh Reverse Proxy & SSL (HTTPS/WSS) dari panel hosting.
+  # Contoh: "https://voice.clarity-id.net"
+  public_url: "https://voice.clarity-id.net"
+
+voice:
+  # Maximum hearing distance in Minecraft blocks.
+  max_distance: 48.0
+
+  # OTP code validity duration in seconds (default: 120 seconds = 2 minutes).
+  otp_duration_seconds: 120
+
+  # Interval in ticks for syncing 3D player positions and orientations to Web clients.
+  # 20 ticks = 1 second. 2 ticks = 100ms.
+  position_sync_interval_ticks: 2
+
+  # Category name for Simple Voice Chat volume settings in mod menu.
+  category_name: "clarity_voice"

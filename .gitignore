@@ -1,0 +1,55 @@
+# ==========================================
+# Gradle & Build Artifacts
+# ==========================================
+.gradle/
+build/
+bin/
+out/
+
+# ==========================================
+# Local Gradle Configuration
+# (Contains local machine Java paths)
+# ==========================================
+gradle.properties
+
+# ==========================================
+# IDE & Editor Files
+# ==========================================
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json.example
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# ==========================================
+# Local Test & Scratch Files
+# ==========================================
+/*.png
+!src/main/resources/web/clarity-logo.png
+powershell.cmd
+.github/modernize/
+
+# ==========================================
+# OS & System Junk
+# ==========================================
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ==========================================
+# Logs & Temporary Files
+# ==========================================
+*.log
+*.tmp
+*.bak
+run/
+server/
