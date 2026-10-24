@@ -1,0 +1,27 @@
+prefix: "<aqua>Clarity Voice</aqua>"
+command:
+  only_players: "<red>Dieser Befehl kann nur von Spielern im Spiel ausgeführt werden.</red>"
+  otp:
+    title: "<aqua>Clarity Voice</aqua>"
+    code: "<gray>Dein OTP-Code: <gold><otp></gold> <dark_gray>(Gültig für <duration> Sekunden)</dark_gray></gray>"
+    actions: "<gray>Schnellaktionen: </gray>"
+    copy_button: "<yellow><bold>[CODE KOPIEREN]</bold></yellow>"
+    copy_hover: "<yellow>Klicke, um den OTP-Code (<otp>) zu kopieren</yellow>"
+    web_button: "<aqua><bold>[WEB VOICE ÖFFNEN]</bold></aqua>"
+    web_hover: "<aqua>Klicke, um Web Voice im Browser zu öffnen</aqua>"
+  disconnect:
+    success: "<green>Deine Web Voice Sitzung wurde getrennt.</green>"
+    no_session: "<red>Du hast keine aktive Web Voice Sitzung.</red>"
+  status:
+    title: "<aqua>Clarity Voice - Verbindungsstatus</aqua>"
+    mod: "<gray>Voice Chat Mod: <value></gray>"
+    web: "<gray>Web Voice Chat: <value></gray>"
+    connected: "<green>Verbunden</green>"
+    disconnected: "<red>Getrennt</red>"
+    group: "<gray>Sprachgruppe: <aqua><group></aqua></gray>"
+    no_group: "<dark_gray>Keine</dark_gray>"
+  help:
+    title: "<aqua>Clarity Voice - Befehlsliste</aqua>"
+    otp: "<gray>/<cmd> otp - Generiert OTP-Code für Web Voice</gray>"
+    disconnect: "<gray>/<cmd> disconnect - Trennt aktive Web Voice Sitzung</gray>"
+    status: "<gray>/<cmd> status - Zeigt aktuellen Verbindungsstatus</gray>"

@@ -1,0 +1,27 @@
+prefix: "<aqua>Clarity Voice</aqua>"
+command:
+  only_players: "<red>该命令只能由游戏内的玩家执行。</red>"
+  otp:
+    title: "<aqua>Clarity Voice</aqua>"
+    code: "<gray>您的OTP验证码: <gold><otp></gold> <dark_gray>(有效期 <duration> 秒)</dark_gray></gray>"
+    actions: "<gray>快捷操作: </gray>"
+    copy_button: "<yellow><bold>[复制验证码]</bold></yellow>"
+    copy_hover: "<yellow>点击将OTP验证码 (<otp>) 复制到剪贴板</yellow>"
+    web_button: "<aqua><bold>[打开 WEB VOICE]</bold></aqua>"
+    web_hover: "<aqua>点击在浏览器中打开 Web Voice</aqua>"
+  disconnect:
+    success: "<green>您的 Web Voice 会话已成功断开。</green>"
+    no_session: "<red>您当前没有处于活动状态的 Web Voice 会话。</red>"
+  status:
+    title: "<aqua>Clarity Voice - 连接状态</aqua>"
+    mod: "<gray>Voice Chat Mod: <value></gray>"
+    web: "<gray>Web Voice Chat: <value></gray>"
+    connected: "<green>已连接</green>"
+    disconnected: "<red>未连接</red>"
+    group: "<gray>语音群组: <aqua><group></aqua></gray>"
+    no_group: "<dark_gray>无</dark_gray>"
+  help:
+    title: "<aqua>Clarity Voice - 命令列表</aqua>"
+    otp: "<gray>/<cmd> otp - 生成用于登录 Web Voice 的 OTP 验证码</gray>"
+    disconnect: "<gray>/<cmd> disconnect - 断开您当前活动的 Web Voice 会话</gray>"
+    status: "<gray>/<cmd> status - 显示当前语音连接状态</gray>"

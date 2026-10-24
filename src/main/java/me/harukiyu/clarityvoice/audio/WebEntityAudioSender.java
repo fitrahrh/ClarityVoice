@@ -86,8 +86,11 @@ public class WebEntityAudioSender {
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         if (online.getUniqueId().equals(playerUuid)) continue;
                         VoicechatConnection conn = voiceApi.getConnectionOf(online.getUniqueId());
-                        if (conn != null && conn.isInstalled() && conn.isInGroup() && group.getId().equals(conn.getGroup().getId())) {
-                            groupChannel.addTarget(conn);
+                        if (conn != null && conn.isInstalled() && conn.isInGroup()) {
+                            Group targetGroup = conn.getGroup();
+                            if (targetGroup != null && group.getId() != null && group.getId().equals(targetGroup.getId())) {
+                                groupChannel.addTarget(conn);
+                            }
                         }
                     }
                     groupChannel.send(opusBytes);

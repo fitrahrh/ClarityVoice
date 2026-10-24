@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#080c14" />
     <meta name="description" content="Bergabung ke Proximity Voice Chat server Minecraft langsung dari browser dengan efek 3D Spatial Audio." />
-    <title>Voice — Clarity Realm</title>
+    <title>Voice - Clarity Realm</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="icon" type="image/png" href="clarity-logo.png" />
@@ -19,7 +19,6 @@
       <span data-i18n="announcement_title">3D PROXIMITY VOICE CHAT ONLINE</span>
       <span class="announcement-divider">/</span>
       <span data-i18n="announcement_desc">Dengar dan bicara dengan pemain di sekitarmu secara real-time</span>
-      <span aria-hidden="true">↗</span>
     </div>
 
     <!-- SITE HEADER -->
@@ -39,15 +38,15 @@
         <!-- LANGUAGE SELECTOR -->
         <div class="lang-selector">
           <select id="langSelect" class="lang-dropdown" aria-label="Pilih Bahasa">
-            <option value="id">🇮🇩 ID</option>
-            <option value="en">🇺🇸 EN</option>
-            <option value="de">🇩🇪 DE</option>
-            <option value="es">🇪🇸 ES</option>
-            <option value="fr">🇫🇷 FR</option>
-            <option value="ja">🇯🇵 JA</option>
-            <option value="pt">🇧🇷 PT</option>
-            <option value="ru">🇷🇺 RU</option>
-            <option value="zh">🇨🇳 ZH</option>
+            <option value="id">ID (Indonesia)</option>
+            <option value="en">EN (English)</option>
+            <option value="de">DE (Deutsch)</option>
+            <option value="es">ES (Español)</option>
+            <option value="fr">FR (Français)</option>
+            <option value="ja">JA (日本語)</option>
+            <option value="pt">PT (Português)</option>
+            <option value="ru">RU (Русский)</option>
+            <option value="zh">ZH (中文)</option>
           </select>
         </div>
 
@@ -87,7 +86,6 @@
             <!-- HTTP Browser Microphone Warning Notice -->
             <div id="insecureHttpNotice" class="insecure-notice hidden">
               <div class="notice-top">
-                <span class="notice-icon">⚠️</span>
                 <strong data-i18n="notice_mic_title">Akses Mikrofon Memerlukan HTTPS / Izin Browser</strong>
               </div>
               <p data-i18n="notice_mic_desc">
@@ -117,16 +115,13 @@
             <div class="hero-buttons">
               <button class="button button-primary" id="btnConnect">
                 <span id="btnConnectText" data-i18n="btn_connect">Hubungkan Mikrofon</span>
-                <span aria-hidden="true">↗</span>
               </button>
             </div>
           </div>
 
           <div class="hero-note">
-            <span class="note-avatar">◈</span>
             <span><span data-i18n="hero_hint_1">Gunakan</span> <strong>/voice otp</strong> <span data-i18n="hero_hint_2">di dalam game</span></span>
             <span class="note-divider"></span>
-            <span class="stars">★★★★★</span>
             <small data-i18n="hero_audio_tag">3D HRTF Web Audio</small>
           </div>
         </div>
@@ -135,7 +130,7 @@
         <div class="hero-art" aria-label="Visual dunia fantasi Clarity Realm">
           <div class="art-glow"></div>
           <div class="sun"></div>
-          <div class="art-moon">✦</div>
+          <div class="art-moon"></div>
           <div class="cloud cloud-one"></div>
           <div class="cloud cloud-two"></div>
           <div class="mountain mountain-back"></div>
@@ -154,12 +149,11 @@
           <div class="floating-cube cube-two"></div>
           <div class="floating-cube cube-three"></div>
           <div class="art-label">
-            <span class="label-mark">✳</span>
+            <span class="label-mark"></span>
             <span>
               <small data-i18n="art_spatial">SPATIAL AUDIO ENGINE</small>
               <strong data-i18n="art_opus">48kHz Opus & HRTF Active</strong>
             </span>
-            <span class="label-arrow">↗</span>
           </div>
         </div>
 
@@ -188,7 +182,6 @@
         <!-- Insecure Context Notice for Connected Dashboard -->
         <div id="dashMicWarningNotice" class="insecure-notice hidden" style="margin-bottom: 24px;">
           <div class="notice-top">
-            <span class="notice-icon">⚠️</span>
             <strong data-i18n="notice_listen_only">Mode Hanya Dengar Aktif (Mikrofon Dibatasi Browser)</strong>
           </div>
           <p data-i18n="notice_listen_desc">
@@ -207,7 +200,6 @@
 
             <!-- VOICE GROUP CARD (Visible if in a Simple Voice Chat group) -->
             <div id="voiceGroupCard" class="group-card hidden">
-              <div class="group-icon-wrap">👥</div>
               <div class="group-details">
                 <span class="group-tag" data-i18n="group_badge">GRUP SUARA MOD</span>
                 <strong id="groupNameText">Grup</strong>
@@ -230,11 +222,9 @@
             <!-- ACTION BUTTONS -->
             <div class="action-buttons-grid">
               <button id="btnMute" class="control-btn" type="button">
-                <span class="btn-icon">🎙</span>
                 <span id="btnMuteText" data-i18n="btn_mute">Mute Mic</span>
               </button>
               <button id="btnDeafen" class="control-btn" type="button">
-                <span class="btn-icon">🎧</span>
                 <span id="btnDeafenText" data-i18n="btn_deafen">Deafen</span>
               </button>
             </div>
@@ -289,7 +279,7 @@
                 <div class="coord-cell"><small>Z</small><strong id="coordZ">0.0</strong></div>
               </div>
               <div class="coords-note">
-                <span>◈ <span data-i18n="coords_spatial">HRTF Spatial Audio</span> • <span data-i18n="coords_radius">Radius</span>: <strong id="maxDistText">48</strong> <span data-i18n="coords_blocks">Blok</span></span>
+                <span><span data-i18n="coords_spatial">HRTF Spatial Audio</span> - <span data-i18n="coords_radius">Radius</span>: <strong id="maxDistText">48</strong> <span data-i18n="coords_blocks">Blok</span></span>
               </div>
             </div>
           </div>
@@ -310,7 +300,6 @@
             <div id="nearbyPlayersList" class="players-grid">
               <!-- Populated dynamically via app.js -->
               <div class="empty-players">
-                <span class="empty-glyph">◈</span>
                 <strong data-i18n="nearby_empty_title">Tidak ada pemain di dekatmu</strong>
                 <p data-i18n="nearby_empty_desc">Pemain dalam radius 48 blok di world yang sama akan otomatis terdengar dan muncul di sini.</p>
               </div>
@@ -322,28 +311,28 @@
       <!-- 3. TRUST & FEATURES STRIP -->
       <section class="trust-strip" id="benefits" aria-label="Keunggulan ClarityVoice">
         <div class="trust-item">
-          <span class="trust-icon">✧</span>
+          <span class="trust-icon">01</span>
           <span>
             <strong data-i18n="feat_1_title">Langsung Masuk</strong>
             <small data-i18n="feat_1_desc">Cukup buka browser & masukkan OTP</small>
           </span>
         </div>
         <div class="trust-item">
-          <span class="trust-icon">◈</span>
+          <span class="trust-icon">02</span>
           <span>
             <strong data-i18n="feat_2_title">3D Spatial HRTF</strong>
             <small data-i18n="feat_2_desc">Arah & jarak suara presisi sesuai game</small>
           </span>
         </div>
         <div class="trust-item">
-          <span class="trust-icon">⌘</span>
+          <span class="trust-icon">03</span>
           <span>
             <strong data-i18n="feat_3_title">Lintas Platform</strong>
-            <small data-i18n="feat_3_desc">Mod Simple Voice Chat ↔ Web Client</small>
+            <small data-i18n="feat_3_desc">Mod Simple Voice Chat / Web Client</small>
           </span>
         </div>
         <div class="trust-item">
-          <span class="trust-icon">☏</span>
+          <span class="trust-icon">04</span>
           <span>
             <strong data-i18n="feat_4_title">Kontrol Independen</strong>
             <small data-i18n="feat_4_desc">Atur volume tiap pemain tersendiri</small>
@@ -354,13 +343,12 @@
       <!-- 4. GUIDE STRIP -->
       <section class="faq-strip" id="guide">
         <div>
-          <span class="faq-icon">?</span>
           <span>
             <strong data-i18n="guide_title">Cara menggunakan Clarity Web Voice?</strong>
             <small data-i18n="guide_desc">Ketik <code>/voice otp</code> di chat Minecraft untuk mendapatkan 6 digit kode instan.</small>
           </span>
         </div>
-        <a href="#home" class="guide-link"><span data-i18n="guide_start">Mulai Bicara</span> <span>↗</span></a>
+        <a href="#home" class="guide-link"><span data-i18n="guide_start">Mulai Bicara</span></a>
       </section>
     </main>
 
@@ -370,7 +358,7 @@
         <img src="clarity-logo.png" alt="Clarity Logo" class="brand-logo footer-logo" />
         <span class="brand-name">CLARITY<span>VOICE</span></span>
       </div>
-      <span data-i18n="footer_copy">© 2026 Clarity Realm. Web Voice Chat Powered by Simple Voice Chat API.</span>
+      <span data-i18n="footer_copy">© 2026 Clarity Network. Web Voice Chat Powered by Simple Voice Chat API.</span>
       <div>
         <a href="#benefits" data-i18n="nav_features">Fitur</a>
         <a href="#guide" data-i18n="nav_guide">Bantuan</a>

@@ -85,7 +85,7 @@
             feat_2_title: '3D Spatial HRTF',
             feat_2_desc: 'Arah & jarak suara presisi sesuai game',
             feat_3_title: 'Lintas Platform',
-            feat_3_desc: 'Mod Simple Voice Chat ↔ Web Client',
+            feat_3_desc: 'Mod Simple Voice Chat / Web Client',
             feat_4_title: 'Kontrol Independen',
             feat_4_desc: 'Atur volume tiap pemain tersendiri',
             guide_title: 'Cara menggunakan Clarity Web Voice?',
@@ -177,7 +177,7 @@
             feat_2_title: '3D Spatial HRTF',
             feat_2_desc: 'Precise distance and direction audio',
             feat_3_title: 'Cross-Platform',
-            feat_3_desc: 'Simple Voice Chat Mod ↔ Web Client',
+            feat_3_desc: 'Simple Voice Chat Mod / Web Client',
             feat_4_title: 'Independent Controls',
             feat_4_desc: 'Adjust each player volume individually',
             guide_title: 'How to use Clarity Web Voice?',
@@ -1294,7 +1294,7 @@
             if (voiceGroupCard) {
                 voiceGroupCard.classList.remove('hidden');
                 groupNameText.textContent = data.group.name;
-                groupTypeText.textContent = `${data.group.type || 'NORMAL'} • ${t('group_active')}`;
+                groupTypeText.textContent = `${data.group.type || 'NORMAL'} - ${t('group_active')}`;
             }
         } else {
             if (voiceGroupCard) {
@@ -1506,7 +1506,6 @@
         if (players.length === 0) {
             nearbyPlayersList.innerHTML = `
                 <div class="empty-players">
-                    <span class="empty-glyph">◈</span>
                     <strong>${t('nearby_empty_title')}</strong>
                     <p>${t('nearby_empty_desc')}</p>
                 </div>

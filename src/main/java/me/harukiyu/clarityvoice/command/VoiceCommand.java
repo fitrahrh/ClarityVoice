@@ -1,5 +1,6 @@
 package me.harukiyu.clarityvoice.command;
 
+import de.maxhenkel.voicechat.api.Group;
 import de.maxhenkel.voicechat.api.VoicechatConnection;
 import de.maxhenkel.voicechat.api.VoicechatServerApi;
 import me.harukiyu.clarityvoice.config.VoiceConfig;
@@ -138,8 +139,11 @@ public class VoiceCommand implements CommandExecutor, TabCompleter {
             VoicechatConnection conn = api.getConnectionOf(player.getUniqueId());
             if (conn != null) {
                 modConnected = conn.isConnected();
-                if (conn.isInGroup() && conn.getGroup() != null) {
-                    groupName = conn.getGroup().getName();
+                if (conn.isInGroup()) {
+                    Group group = conn.getGroup();
+                    if (group != null) {
+                        groupName = group.getName();
+                    }
                 }
             }
         }

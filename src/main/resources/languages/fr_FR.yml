@@ -1,0 +1,27 @@
+prefix: "<aqua>Clarity Voice</aqua>"
+command:
+  only_players: "<red>Cette commande ne peut être exécutée que par des joueurs en jeu.</red>"
+  otp:
+    title: "<aqua>Clarity Voice</aqua>"
+    code: "<gray>Votre code OTP: <gold><otp></gold> <dark_gray>(Valide pendant <duration> secondes)</dark_gray></gray>"
+    actions: "<gray>Actions Rapides: </gray>"
+    copy_button: "<yellow><bold>[COPIER LE CODE]</bold></yellow>"
+    copy_hover: "<yellow>Cliquez pour copier le code OTP (<otp>) dans le presse-papiers</yellow>"
+    web_button: "<aqua><bold>[OUVRIR WEB VOICE]</bold></aqua>"
+    web_hover: "<aqua>Cliquez pour ouvrir Web Voice dans le navigateur</aqua>"
+  disconnect:
+    success: "<green>Votre session Web Voice a été déconnectée avec succès.</green>"
+    no_session: "<red>Vous n'avez pas de session Web Voice active.</red>"
+  status:
+    title: "<aqua>Clarity Voice - État de Connexion</aqua>"
+    mod: "<gray>Mod Voice Chat: <value></gray>"
+    web: "<gray>Web Voice Chat: <value></gray>"
+    connected: "<green>Connecté</green>"
+    disconnected: "<red>Déconnecté</red>"
+    group: "<gray>Groupe Vocal: <aqua><group></aqua></gray>"
+    no_group: "<dark_gray>Aucun</dark_gray>"
+  help:
+    title: "<aqua>Clarity Voice - Liste des Commandes</aqua>"
+    otp: "<gray>/<cmd> otp - Génère un code OTP pour se connecter à Web Voice</gray>"
+    disconnect: "<gray>/<cmd> disconnect - Déconnecte votre session active de Web Voice</gray>"
+    status: "<gray>/<cmd> status - Affiche l'état actuel de la connexion vocale</gray>"
